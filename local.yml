@@ -2,15 +2,16 @@
 - hosts: localhost
   connection: local
   tags: all
-  become: true
   pre_tasks:
     - name: Pre-task | Update package cache (Ubuntu)
+      become: true
       ansible.builtin.apt:
         update-cache: yes
       changed_when: false
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
     - name: Pre-task | Update package cache (Mac)
+      become: false
       community.general.homebrew:
         update_homebrew: yes
       changed_when: false
