@@ -1,37 +1,38 @@
-taps:
-  - homebrew/cask-fonts
-
-formulae:
-  - bat
-  - fd
-  - gawk
-  - imagemagick
-  - lsd
-  - ncdu
-  - neofetch
-  - pstree
-  - ripgrep
-  - stow
-  - tldr
-  - tmux
-  - zoxide
-  - fzf
-  - go
-  - julia
-  - neovim
-  - node
-  - pandoc
-  - python
-  - yarn
-
-casks:
-  - arduino
-  - gimp
-  - google-chrome
-  - kitty
-  - mactex-no-gui
-  - neovide
-  - skim
-  - font-mononoki-nerd-font
-  - font-fira-code-nerd-font
-  - font-hack-nerd-font
+formulae: bat
+# taps:
+#   - homebrew/cask-fonts
+#
+# formulae:
+#   - bat
+#   - fd
+#   - gawk
+#   - imagemagick
+#   - lsd
+#   - ncdu
+#   - neofetch
+#   - pstree
+#   - ripgrep
+#   - stow
+#   - tldr
+#   - tmux
+#   - zoxide
+#   - fzf
+#   - go
+#   - julia
+#   - neovim
+#   - node
+#   - pandoc
+#   - python
+#   - yarn
+#
+# casks:
+#   - arduino
+#   - gimp
+#   - google-chrome
+#   - kitty
+#   - mactex-no-gui
+#   - neovide
+#   - skim
+#   - font-mononoki-nerd-font
+#   - font-fira-code-nerd-font
+#   - font-hack-nerd-font
