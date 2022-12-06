@@ -1,0 +1,21 @@
+sources:
+  - ppa:jonathonf/vim
+  - ppa:neovim-ppa/stable
+
+packages:
+  - bspwm
+  - curl
+  - git
+  - imagemagick
+  - make
+  - ncdu
+  - neovim
+  - nitrogen
+  - nodejs
+  - npm
+  - polybar
+  - rofi
+  - stow
+  - sxhkd
+  - vim
+  - zsh

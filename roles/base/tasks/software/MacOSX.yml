@@ -1,0 +1,20 @@
+# Add sources
+- name: Tap Brew Sources
+  become: false
+  community.general.homebrew_tap:
+    name: "{{ taps }}"
+    state: "present"
+
+# Install formulae
+- name: Install Brew Formulae
+  become: false
+  community.general.homebrew:
+    name: "{{ formulae }}"
+    state: "present"
+
+# Install casks
+- name: Install Brew Casks
+  become: false
+  community.general.homebrew_cask:
+    name: "{{ casks }}"
+    state: "present"
