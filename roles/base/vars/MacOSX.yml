@@ -1,4 +1,6 @@
-formulae: go
+formulae:
+  - go
+  - lazygit
 # taps:
 #   - homebrew/cask-fonts
 #
