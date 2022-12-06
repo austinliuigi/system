@@ -12,7 +12,7 @@
 
     - name: Pre-task | Update package cache (Mac)
       community.general.homebrew:
-        update-homebrew: yes
+        update_homebrew: yes
       changed_when: false
       when: ansible_distribution == "MacOSX"
 
