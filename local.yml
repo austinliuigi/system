@@ -17,8 +17,8 @@
       changed_when: false
       when: ansible_distribution == "MacOSX"
 
-# - hosts: localhost
-#   connection: local
-#   become: true
-#   roles:
-#     - base
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - base
