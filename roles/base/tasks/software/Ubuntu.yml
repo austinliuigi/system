@@ -2,7 +2,7 @@
 - name: Add sources
   become: true
   ansible.builtin.apt_repository:
-    name: "{{ sources }}"
+    repo: "{{ sources }}"
     state: "present"
 
 # Install packages
