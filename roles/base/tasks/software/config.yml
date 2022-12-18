@@ -1,8 +1,8 @@
-# - name: Clone dotfiles repository
-#   ansible.builtin.git:
-#     repo: "https://github.com/austinliuigi/dotfiles.git"
-#     dest: "{{ ansible_user_dir }}/dotfiles"
-#
+- name: Clone dotfiles repository
+  ansible.builtin.git:
+    repo: "https://github.com/austinliuigi/dotfiles.git"
+    dest: "{{ ansible_user_dir }}/dotfiles"
+
 # - name: Stow dotfiles
 #   ansible.builtin.shell: |
 #     stow -v -t {{ ansible_user_dir }}
