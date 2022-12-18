@@ -13,7 +13,7 @@ packages:
   - nitrogen
   - nodejs
   - npm
-  - polybar
+  # - polybar
   - rofi
   - stow
   - sxhkd
