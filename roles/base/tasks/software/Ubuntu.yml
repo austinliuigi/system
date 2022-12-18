@@ -2,8 +2,9 @@
 - name: Add sources
   become: true
   ansible.builtin.apt_repository:
-    repo: "{{ sources }}"
+    repo: "{{ item }}"
     state: "present"
+  loop: "{{ sources }}"
 
 # Install packages
 - name: Install packages
