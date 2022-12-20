@@ -3,10 +3,6 @@
   connection: local
   tags: all
   pre_tasks:
-    - name: Gather facts as user (not root)
-      become: false
-      ansible.builtin.setup:
-
     - name: Pre-task | Update package cache (Ubuntu)
       become: true
       ansible.builtin.apt:

@@ -2,13 +2,8 @@
   become: false
   ansible.builtin.git:
     repo: "https://github.com/austinliuigi/dotfiles.git"
-    dest: "{{ ansible_user_dir }}/dotfiles"
+    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
     clone: true
-
-- name: Debug dotfiles
-  become: false
-  ansible.builtin.debug:
-    msg: "{{ ansible_user_dir }}/dotfiles"
 
 # - name: Stow dotfiles
 #   ansible.builtin.shell: |
