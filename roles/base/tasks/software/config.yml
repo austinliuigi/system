@@ -4,6 +4,10 @@
     dest: "{{ ansible_user_dir }}/dotfiles"
     clone: true
 
+- name: Debug dotfiles
+  ansible.builtin.debug:
+    msg: "{{ ansible_user_dir }}/dotfiles"
+
 # - name: Stow dotfiles
 #   ansible.builtin.shell: |
 #     stow -v -t {{ ansible_user_dir }}
