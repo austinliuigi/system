@@ -25,7 +25,7 @@
         msg: "{{ lookup('env', 'HOME') }}"
       register: env
     - ansible.builtin.debug:
-      var: env
+        var: env
 
 - hosts: localhost
   connection: local
