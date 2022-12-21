@@ -23,9 +23,13 @@
     - name: Register output of $HOME lookup
       ansible.builtin.debug:
         msg: "{{ lookup('env', 'HOME') }}"
-      register: env
+      register: env_home_lookup
     - ansible.builtin.debug:
-        var: env
+        var: env_home_lookup
+    - ansible.builtin.set_fact:
+        user_dir: "{{ env_home_lookup.msg }}"
+    - ansible.builtin.debug:
+        var: user_dir
 
 - hosts: localhost
   connection: local
