@@ -42,8 +42,13 @@ casks:
 
 dotfiles:
   - bash
+  - btop
   - kitty
+  - kmonad
+  - lazygit
   - nvim
   - readline
   - stylua
+  - tmux
+  - vim
   - zsh

@@ -1,4 +1,3 @@
----
 - hosts: localhost
   connection: local
   tags: all
@@ -16,6 +15,15 @@
         update_homebrew: yes
       changed_when: false
       when: ansible_distribution == "MacOSX"
+
+- hosts: localhost
+  connection: local
+  become: false
+  tasks:
+    - name: Register output of $HOME lookup
+      ansible.builtin.debug:
+        msg: "{{ lookup('env', 'HOME') }}"
+      register: env
 
 - hosts: localhost
   connection: local

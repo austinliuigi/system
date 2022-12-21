@@ -6,6 +6,7 @@
     clone: true
 
 # - name: Stow dotfiles
+#   loop: "{{ dotfiles }}"
 #   ansible.builtin.shell: |
 #     stow -v -t {{ ansible_user_dir }}
 #   args:

@@ -19,3 +19,20 @@ packages:
   - sxhkd
   - vim
   - zsh
+
+dotfiles:
+  - bash
+  - bspwm
+  - btop
+  - kitty
+  - kmonad
+  - lazygit
+  - nvim
+  - picom
+  - polybar
+  - readline
+  - stylua
+  - sxhkd
+  - tmux
+  - vim
+  - zsh
