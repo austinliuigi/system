@@ -2,7 +2,7 @@
   become: false
   ansible.builtin.git:
     repo: "https://github.com/austinliuigi/dotfiles.git"
-    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+    dest: "{{ user_dir }}/dotfiles"
     clone: true
 
 # - name: Stow dotfiles

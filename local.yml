@@ -24,12 +24,13 @@
       ansible.builtin.debug:
         msg: "{{ lookup('env', 'HOME') }}"
       register: env_home_lookup
-    - ansible.builtin.debug:
-        var: env_home_lookup
+    # - ansible.builtin.debug:
+    #     var: env_home_lookup
+    - name: Set user_dir variable
     - ansible.builtin.set_fact:
         user_dir: "{{ env_home_lookup.msg }}"
-    - ansible.builtin.debug:
-        var: user_dir
+    # - ansible.builtin.debug:
+    #     var: user_dir
 
 - hosts: localhost
   connection: local
