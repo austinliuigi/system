@@ -9,7 +9,7 @@
 - name: Debug clone_dotfiles var
   ansible.builtin.debug:
     var: clone_dotfiles
-  when: "{{ clone_dotfiles.failed }} == false"
+  when: clone_dotfiles.failed == false
 
 # - name: Stow dotfiles
 #   loop: "{{ dotfiles }}"
