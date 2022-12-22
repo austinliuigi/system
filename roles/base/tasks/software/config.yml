@@ -13,5 +13,5 @@
     chdir: "{{ user_dir }}/dotfiles"
     executable: /bin/bash
   register: output
-  changed_when: "'LINK' in output.stderr"
-  when: clone_dotfiles.failed == false
+  # changed_when: "'LINK' in output.stderr"
+  # when: clone_dotfiles.failed == false
