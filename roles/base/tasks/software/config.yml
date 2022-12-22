@@ -6,16 +6,12 @@
     clone: true
   register: clone_dotfiles
 
-- name: Debug clone_dotfiles var
-  ansible.builtin.debug:
-    var: clone_dotfiles
-  when: clone_dotfiles.failed == true
-
-# - name: Stow dotfiles
-#   loop: "{{ dotfiles }}"
-#   ansible.builtin.shell:
-#     cmd: stow -v -t {{ item }} {{ user_dir }}
-#     chdir: "{{ user_dir }}/dotfiles"
-#     executable: /bin/bash
-#   register: output
-#   changed_when: '"LINK" in output.stderr'
+- name: Stow dotfiles
+  loop: "{{ dotfiles }}"
+  ansible.builtin.shell:
+    cmd: stow -v -t {{ item }} {{ user_dir }}
+    chdir: "{{ user_dir }}/dotfiles"
+    executable: /bin/bash
+  register: output
+  changed_when: '"LINK" in output.stderr'
+  when: clone_dotfiles.failed == false
