@@ -1,9 +1,10 @@
 - name: Clone dotfiles repository
   become: false
-  ansible.builtin.git:
+  git:
     repo: "https://github.com/austinliuigi/dotfiles.git"
     dest: "{{ user_dir }}/dotfiles"
     clone: true
+    force: false
   register: clone_dotfiles
 
 # use shell instead of ansible.builtin.shell if on

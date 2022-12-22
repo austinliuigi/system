@@ -1,7 +1,7 @@
 # Add sources
 - name: Add sources
   become: true
-  ansible.builtin.apt_repository:
+  apt_repository:
     repo: "{{ item }}"
     state: "present"
   loop: "{{ sources }}"
@@ -9,9 +9,23 @@
 # Install packages
 - name: Install packages
   become: true
-  ansible.builtin.package:
+  package:
     name: "{{ packages }}"
     state: "present"
+
+# - name: Install fonts
+#   become: true
+#   copy:
+#     src:
+#     dest: /usr/local/share/fonts/
+
+# - name: Build neovim from source
+#   become: true
+#   ansible.builtin.shell: |
+#     apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+#     git clone https://github.com/neovim/neovim && \
+#     cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && \
+#     make install
 
 # - name: Install kitty
 #   become: false
