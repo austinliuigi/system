@@ -11,7 +11,7 @@
 - name: Stow dotfiles
   loop: "{{ dotfiles }}"
   loop_control:
-    label: "{{ item.name }}"
+    label: "{{ output.stderr }}"
   shell:
     cmd: stow -v --target={{ user_dir }} {{ item }}
     chdir: "{{ user_dir }}/dotfiles"
