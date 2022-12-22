@@ -4,11 +4,17 @@
     repo: "https://github.com/austinliuigi/dotfiles.git"
     dest: "{{ user_dir }}/dotfiles"
     clone: true
+  register: clone_dotfiles
+
+- name: Debug clone_dotfiles var
+  ansible.builtin.debug:
+    var: clone_dotfiles
 
 # - name: Stow dotfiles
 #   loop: "{{ dotfiles }}"
-#   ansible.builtin.shell: |
-#     stow -v -t {{ ansible_user_dir }}
-#   args:
-#     chdir: "{{ ansible_user_dir }}/dotfiles"
+#   ansible.builtin.shell:
+#     cmd: stow -v -t {{ item }} {{ user_dir }}
+#     chdir: "{{ user_dir }}/dotfiles"
 #     executable: /bin/bash
+#   register: output
+#   changed_when: '"LINK" in output.stderr'
