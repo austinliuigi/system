@@ -9,9 +9,9 @@
 - name: Stow dotfiles
   loop: "{{ dotfiles }}"
   ansible.builtin.shell:
-    cmd: stow -v -t {{ item }} {{ user_dir }}
+    cmd: stow -v --target={{ user_dir }} {{ item }}
     chdir: "{{ user_dir }}/dotfiles"
     executable: /bin/bash
   register: output
-  changed_when: '"LINK" in output.stderr'
+  changed_when: "'LINK' in output.stderr"
   when: clone_dotfiles.failed == false
