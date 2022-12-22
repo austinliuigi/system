@@ -6,12 +6,14 @@
     clone: true
   register: clone_dotfiles
 
+# use shell instead of ansible.builtin.shell if on
+# version < 2.10.4 (https://github.com/ansible/ansible/issues/72627)
 - name: Stow dotfiles
   loop: "{{ dotfiles }}"
-  ansible.builtin.shell:
+  shell:
     cmd: stow -v --target={{ user_dir }} {{ item }}
     chdir: "{{ user_dir }}/dotfiles"
     executable: /bin/bash
   register: output
-  # changed_when: "'LINK' in output.stderr"
-  # when: clone_dotfiles.failed == false
+  changed_when: "'LINK' in output.stderr"
+  when: clone_dotfiles.failed == false
