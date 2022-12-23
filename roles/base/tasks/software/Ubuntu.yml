@@ -13,11 +13,11 @@
     name: "{{ packages }}"
     state: "present"
 
-# - name: Install fonts
-#   become: true
-#   copy:
-#     src:
-#     dest: /usr/local/share/fonts/
+- name: Install fonts
+  become: true
+  copy:
+    src: fonts/
+    dest: /usr/local/share/fonts/
 
 # - name: Build neovim from source
 #   become: true
