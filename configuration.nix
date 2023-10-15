@@ -20,12 +20,21 @@
 
   # Networking
   networking.hostName = "x1-carbon"; # define hostname
+  networking.wireless.iwd.enable = true;
   networking.networkmanager.enable = true; # enable networking
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [];
+    allowedUDPPorts = [];
+    allowedTCPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];  
+    allowedUDPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+  };
+  # programs.kdeconnect.enable = true;
 
 
   # Sound
@@ -37,6 +46,10 @@
     pulse.enable = true;
     jack.enable = true;
   };
+
+
+  # iOS
+  services.usbmuxd.enable = true;
 
 
   # Set time zone
@@ -86,6 +99,8 @@
   # Add fonts
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" "Mononoki" ]; })
+    noto-fonts
+    vistafonts
   ];
 
 
@@ -96,6 +111,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPMLU/Uxg/vRaNsjWIb2DpNmunkG6igcw8VFTamDwr5 austin@Austin-M1"
+    ];
   };
 
 
@@ -106,6 +124,7 @@
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
+    openFirewall = true;
   };
 
   services.kanata = {
@@ -123,19 +142,35 @@
   # Programs
   environment.systemPackages = with pkgs; [
     vim
+    wev
     stow
+    tree
     gcc
-    git
-    rofi-wayland
-    wl-clipboard
-    gimp
-    hyprpaper
+    gnumake
     wget
+    git
+    zip
+    jq
+    unzip
+    rofi-wayland
+    swaylock
+    wl-clipboard
+    hyprpaper
     firefox
     waybar
     kitty
     pulsemixer
+    ripgrep
+    fd
+    gdu
+    tealdeer
+    openvpn
+    brightnessctl
+    libimobiledevice # ios
+    ifuse # ios
   ];
+
+  security.pam.services.swaylock = {};
 
   programs.hyprland.enable = true;
 
