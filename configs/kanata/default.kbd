@@ -4,7 +4,10 @@
   ;;  - press and release and re-press within 500ms == tap (repeat keys)
   ;;  - press and release after 500 ms == hold
   ;;  - press and press-and-release other key == hold
-  scd (tap-hold-release 500 500 esc (layer-while-held secondary))
+  sec (tap-hold-release 500 500 esc (layer-while-held secondary))
+
+  ;;; Remap to activate tertiary layer
+  ter (multi lsft (layer-while-held tertiary))
 )
 
 (defsrc
@@ -20,9 +23,9 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  @scd _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _    _         _    _    _
+  @sec _    _    _    _    _    _    _    _    _    _    _    _
+  @ter _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    lalt lmet           _              _    _    _         _    _    _
 )
 
 (deflayer secondary
@@ -30,6 +33,15 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    left down up   rght _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    caps _    _    _
+  caps _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _         _    _    _
+)
+
+(deflayer tertiary
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  caps _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _         _    _    _
 )
