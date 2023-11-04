@@ -138,6 +138,8 @@
     };
   };
 
+  services.udisks2.enable = true;  # user space mounting
+
 
   # Programs
   environment.systemPackages = with pkgs; [
@@ -155,6 +157,9 @@
     rofi-wayland
     swaylock
     wl-clipboard
+    grim   # screenshot utility
+    slurp  # screen area selection tool
+    swappy
     hyprpaper
     firefox
     waybar
@@ -168,6 +173,8 @@
     brightnessctl
     libimobiledevice # ios
     ifuse # ios
+    pv  # pipe viewer
+    btop
   ];
 
   security.pam.services.swaylock = {};
