@@ -133,7 +133,7 @@
       default = {
         devices = [ ];  # catch all keybaord devices
         config = builtins.readFile
-          ./configs/kanata/default.kbd;
+          ../../configs/kanata/default.kbd;
       };
     };
   };
@@ -144,37 +144,28 @@
   # Programs
   environment.systemPackages = with pkgs; [
     vim
-    wev
-    stow
-    tree
     gcc
     gnumake
     wget
     git
-    zip
-    jq
-    unzip
+    htop
+
     rofi-wayland
     swaylock
     wl-clipboard
     grim   # screenshot utility
     slurp  # screen area selection tool
-    swappy
     hyprpaper
-    firefox
     waybar
+
+    firefox
     kitty
     pulsemixer
-    ripgrep
-    fd
+    pavucontrol
     gdu
-    tealdeer
     openvpn
     brightnessctl
-    libimobiledevice # ios
-    ifuse # ios
     pv  # pipe viewer
-    btop
   ];
 
   security.pam.services.swaylock = {};
