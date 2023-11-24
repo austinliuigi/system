@@ -1,10 +1,17 @@
 (defalias
   ;;; Remap to escape/activate secondary layer
   ;;  - press and release within 500 ms == tap
-  ;;  - press and release and re-press within 500ms == tap (repeat keys)
+  ;;  - press and release and re-press within 500ms == tap action repeated (repeat keys)
   ;;  - press and release after 500 ms == hold
   ;;  - press and press-and-release other key == hold
-  sec (tap-hold-release 500 500 esc (layer-while-held secondary))
+  ;; sec (tap-hold-release 500 500 esc (layer-while-held secondary))
+
+  ;;; Remap to escape/activate secondary layer
+  ;;  - press and release within 500 ms == tap
+  ;;  - press and release and re-press within 500ms == tap action repeated (repeat keys)
+  ;;  - press and release after 500 ms == hold
+  ;;  - press and press other key == hold
+  sec (tap-hold-press 500 500 esc (layer-while-held secondary))
 
   ;;; Remap to activate tertiary layer
   ter (multi lsft (layer-while-held tertiary))
