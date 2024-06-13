@@ -2,7 +2,7 @@
 #   - configuration.nix(5) man page
 #   - NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -16,12 +16,12 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.configurationLimit = 10;  # limit number of generations to save space
-
+  boot.resumeDevice = "/dev/disk/by-label/swap"; # sets the "resume" kernelParam (used to locate target partition hibernation)
 
   # Networking
   networking.hostName = "x1-carbon"; # define hostname
   networking.wireless.iwd.enable = true;
-  networking.networkmanager.enable = true; # enable networking
+  networking.networkmanager.enable = false; # enable networking
   networking.networkmanager.wifi.backend = "iwd";
   networking.firewall = {
     enable = true;
@@ -34,8 +34,6 @@
       { from = 1714; to = 1764; } # KDE Connect
     ];
   };
-  # programs.kdeconnect.enable = true;
-
 
   # Sound
   security.rtkit.enable = true;  # rtkit is optional but recommended
@@ -47,14 +45,11 @@
     jack.enable = true;
   };
 
-
   # iOS
   services.usbmuxd.enable = true;
 
-
   # Set time zone
   time.timeZone = "America/Los_Angeles";
-
 
   # Select internationalization properties
   i18n.defaultLocale = "en_US.UTF-8";
@@ -70,13 +65,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
-
 
   # Garbage collection
   nix.gc = {
@@ -88,7 +81,6 @@
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
   nix.settings.auto-optimise-store = true;
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -97,25 +89,23 @@
 
 
   # Add fonts
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "Mononoki" ]; })
-    noto-fonts
-    vistafonts
-  ];
-
+  # fonts.packages = with pkgs; [
+  #   (nerdfonts.override { fonts = [ "JetBrainsMono" "Mononoki" ]; })
+  #   noto-fonts
+  #   vistafonts
+  # ];
 
   # Add user "austin"
   users.users.austin = {
     isNormalUser = true;
     description = "Austin Liu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPMLU/Uxg/vRaNsjWIb2DpNmunkG6igcw8VFTamDwr5 austin@Austin-M1"
     ];
   };
-
 
   # Services
   services.openssh = {
@@ -140,9 +130,16 @@
 
   services.udisks2.enable = true;  # user space mounting
 
+  services.printing.enable = true;
+  services.printing.drivers = [
+    pkgs.brlaser
+  ];
+
 
   # Programs
   environment.systemPackages = with pkgs; [
+    man-pages
+    man-pages-posix
     vim
     gcc
     gnumake
@@ -150,31 +147,28 @@
     git
     htop
 
-    rofi-wayland
-    swaylock
-    wl-clipboard
-    grim   # screenshot utility
-    slurp  # screen area selection tool
-    hyprpaper
-    waybar
-
     firefox
-    kitty
     pulsemixer
     pavucontrol
     gdu
-    openvpn
     brightnessctl
     pv  # pipe viewer
+
+    virt-manager
   ];
 
   security.pam.services.swaylock = {};
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
 
   programs.zsh.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
 
 
   # This value determines the NixOS release from which the default
