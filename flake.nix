@@ -24,6 +24,13 @@
             ./hosts/x1-carbon
           ];
         };
+        ghost-s1 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = baseExtraSpecialArgs;
+          modules = [
+            ./hosts/ghost-s1
+          ];
+        };
       };
     };
 }
