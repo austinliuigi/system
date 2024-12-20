@@ -16,6 +16,8 @@ in
       man-pages-posix
       vim
       wget
+      gdu
+      pv # pipe viewer
     ];
   };
 }
