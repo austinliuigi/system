@@ -17,6 +17,8 @@
   ter (multi lsft (layer-while-held tertiary))
 )
 
+;; key names: https://github.com/jtroo/kanata/blob/d9325742c719c7208a51e4ec6ccef17c17c787cc/parser/src/keys/mod.rs#L164
+
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -36,7 +38,7 @@
 )
 
 (deflayer secondary
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    brdn brup _    _    _    _    prev pp   next vold mute volu _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    left down up   rght _    _    _
