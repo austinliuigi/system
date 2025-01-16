@@ -111,6 +111,8 @@
       openFirewall = true;
     };
 
+    services.tailscale.enable = true;
+
     services.kanata = {
       enable = true;
       keyboards = {
