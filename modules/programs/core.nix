@@ -14,6 +14,7 @@ in
       htop
       man-pages
       man-pages-posix
+      moreutils
       vim
       wget
       gdu
