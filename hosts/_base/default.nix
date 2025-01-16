@@ -122,6 +122,13 @@
       };
     };
 
+    services.printing = {
+      enable = true;
+      drivers = [
+        pkgs.brlaser
+      ];
+    };
+
     # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/hardware/udisks2.nix
     services.udisks2.enable = true;  # user space mounting
 
