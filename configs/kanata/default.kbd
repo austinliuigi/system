@@ -39,7 +39,7 @@
 
 (deflayer secondary
   _    brdn brup _    _    _    _    prev pp   next vold mute volu _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    end  _    _    _    _    _    home _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    left down up   rght _    _    _
   caps _    _    _    _    _    _    _    _    _    _    _    _    _    _
