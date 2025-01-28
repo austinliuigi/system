@@ -14,7 +14,7 @@
     # Networking
     #   - https://nixos.wiki/wiki/Iwd
     networking.wireless.iwd.enable = true;
-    networking.networkmanager.enable = true; # enable networking
+    networking.networkmanager.enable = false; # enable networking
     networking.networkmanager.wifi.backend = "iwd";
     networking.firewall = {
       enable = true;
@@ -90,6 +90,9 @@
 
     # Enable flakes and new commands
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    # Copy new generation's configuration.nix to /run/current-system/configuration.nix
+    # system.copySystemConfiguration = true;
 
 
     # Add fonts
