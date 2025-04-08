@@ -9,7 +9,7 @@
     [
       ./hardware-configuration.nix  # include the results of the hardware scan.
       ./nvidia.nix
-      ../_base
+      ../_desktop
     ];
 
   config = {

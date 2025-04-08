@@ -9,7 +9,8 @@
 
   config = {
     # Kernel
-    boot.kernelPackages = pkgs.linuxPackages_6_11;
+    #   - https://nixos.wiki/wiki/Linux_kernel
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Networking
     #   - https://nixos.wiki/wiki/Iwd
@@ -18,13 +19,19 @@
     networking.networkmanager.wifi.backend = "iwd";
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [
+        3000 # nextjs dev server
+        53317 # localsend
+      ];
+      allowedUDPPorts = [
+        3000 # nextjs dev server
+        53317 # localsend
+      ];
       allowedTCPPortRanges = [ 
-        { from = 1714; to = 1764; } # KDE Connect
+        { from = 1714; to = 1764; } # kdeconnect
       ];  
       allowedUDPPortRanges = [ 
-        { from = 1714; to = 1764; } # KDE Connect
+        { from = 1714; to = 1764; } # kdeconnect
       ];
     };
 
@@ -130,7 +137,9 @@
     services.printing = {
       enable = true;
       drivers = [
+        pkgs.gutenprint
         pkgs.brlaser
+        pkgs.hplip
       ];
     };
 
@@ -170,14 +179,5 @@
         virt-manager.enable = true;
       };
     };
-
-
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "23.05"; # Did you read the comment?
   };
 }

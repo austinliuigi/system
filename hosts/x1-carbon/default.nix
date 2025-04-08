@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../_base
+      ../_desktop
     ];
 
   config = {
@@ -34,6 +34,16 @@
       ];
     };
 
+    # Accelerated video playback
+    hardware.graphics = {
+      enable = true;
+      extraPackages = [
+        pkgs.intel-media-driver
+        # pkgs.intel-vaapi-driver
+      ];
+    };
+    environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+    # boot.initrd.kernelModules = [ "i915" ];
 
 
     # This value determines the NixOS release from which the default
