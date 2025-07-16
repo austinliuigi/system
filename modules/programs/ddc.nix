@@ -1,3 +1,10 @@
+#===========================================================================================
+# - https://discourse.nixos.org/t/how-to-enable-ddc-brightness-control-i2c-permissions/20800/16
+# - https://discourse.nixos.org/t/brightness-control-of-external-monitors-with-ddcci-backlight/8639/7
+# - https://github.com/NixOS/nixpkgs/issues/292049
+# - https://linux-i2c.vger.kernel.narkive.com/BwIEWfXY/ddc-ci-over-i2c
+# - https://gist.github.com/emilcarr/795a470feb89d3777479e11b25f2931e
+#===========================================================================================
 { pkgs, lib, config, inputs, ... }:
 
 let

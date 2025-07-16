@@ -12,17 +12,22 @@
     ];
 
   config = {
-    # Bootloader
-    boot.loader.grub.enable = true;
-    boot.loader.grub.device = "/dev/sda";
-    boot.loader.grub.useOSProber = true;
-    boot.loader.grub.configurationLimit = 10;  # limit number of generations to save space
-    boot.resumeDevice = "/dev/disk/by-label/swap"; # sets the "resume" kernelParam (used to locate target partition hibernation)
+    #===========================================================================================
+    # Host
+    #===========================================================================================
+    boot.loader.grub = {
+      enable = true;
+      device = "/dev/sda";
+      useOSProber = true;
+      configurationLimit = 10; # limit number of generations to save space
+    };
+    boot.resumeDevice = "/dev/disk/by-label/swap"; # sets the "resume" kernelParam (used to locate target partition for hibernation)
 
-    # Networking
-    networking.hostName = "x1-carbon"; # define hostname
+    networking.hostName = "x1-carbon";
 
-    # Add user "austin"
+    #===========================================================================================
+    # Users
+    #===========================================================================================
     users.users.austin = {
       isNormalUser = true;
       description = "Austin Liu";
@@ -34,7 +39,10 @@
       ];
     };
 
+    #===========================================================================================
     # Accelerated video playback
+    # - https://nixos.wiki/wiki/Accelerated_Video_Playback
+    #===========================================================================================
     hardware.graphics = {
       enable = true;
       extraPackages = [

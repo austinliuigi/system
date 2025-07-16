@@ -2,18 +2,22 @@
 #   - configuration.nix(5) man page
 #   - NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [ ../../modules ];
 
   config = {
+    #===========================================================================================
     # Kernel
     #   - https://nixos.wiki/wiki/Linux_kernel
+    #===========================================================================================
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
+    #===========================================================================================
     # Networking
     #   - https://nixos.wiki/wiki/Iwd
+    #===========================================================================================
     networking.wireless.iwd.enable = true;
     networking.networkmanager.enable = false; # enable networking
     networking.networkmanager.wifi.backend = "iwd";
@@ -36,8 +40,10 @@
     };
 
 
+    #===========================================================================================
     # Sound
     #   - https://nixos.wiki/wiki/PipeWire
+    #===========================================================================================
     security.rtkit.enable = true;  # rtkit is optional but recommended
     services.pipewire = {
       enable = true;
@@ -48,10 +54,108 @@
     };
 
 
+    #===========================================================================================
     # iOS
     #   - https://nixos.wiki/wiki/IOS
+    #===========================================================================================
     services.usbmuxd.enable = true;
 
+
+    #===========================================================================================
+    # OpenSSH
+    #===========================================================================================
+    services.openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
+      openFirewall = true;
+    };
+
+    #===========================================================================================
+    # Tailscale
+    # - https://nixos.wiki/wiki/Tailscale
+    #===========================================================================================
+    services.tailscale.enable = true;
+
+    #===========================================================================================
+    # Kanata
+    #===========================================================================================
+    services.kanata = {
+      enable = true;
+      keyboards = {
+        default = {
+          devices = [ ];  # catch all keybaord devices
+          config = builtins.readFile
+            ../../configs/kanata/default.kbd;
+        };
+      };
+    };
+
+    #===========================================================================================
+    # Printing
+    # - http://localhost:631
+    # - https://nixos.wiki/wiki/Printing
+    #===========================================================================================
+    services.printing = {
+      enable = true;
+      drivers = [
+        pkgs.gutenprint
+        pkgs.brlaser
+        pkgs.hplip
+      ];
+    };
+
+    #===========================================================================================
+    # udisks
+    # - wrapper around mnt that utilizes polkit to allow mounting without requiring root
+    # - improves ui of mnt and utilizes d-bus to allow integration with other programs
+    # - required for most automounting programs, e.g. udiskie
+    # - https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/hardware/udisks2.nix
+    #===========================================================================================
+    services.udisks2.enable = true;
+
+
+    #===========================================================================================
+    # Programs
+    #===========================================================================================
+    environment.systemPackages = with pkgs; [
+      rofi-wayland
+      swaylock
+      wl-clipboard
+      grim   # screenshot utility
+      slurp  # screen area selection tool
+      hyprpaper
+      waybar
+
+      firefox
+      kitty
+      pulsemixer
+      pavucontrol
+      brightnessctl
+    ];
+
+    security.pam.services.swaylock = {};
+
+    programs = {
+      hyprland.enable = true;
+      zsh.enable = true;
+    };
+
+    modules = {
+      programs = {
+        bluetooth.enable = true;
+        core.enable = true;
+        ddc.enable = true;
+        virt-manager.enable = true;
+      };
+    };
+
+
+    #===========================================================================================
+    # Miscellaneous Options
+    #===========================================================================================
 
     # Set time zone
     time.timeZone = "America/Los_Angeles";
@@ -90,19 +194,13 @@
     # https://nixos.wiki/wiki/Storage_optimization
     nix.optimise.automatic = true;
 
-
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
-
 
     # Enable flakes and new commands
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # Copy new generation's configuration.nix to /run/current-system/configuration.nix
-    # system.copySystemConfiguration = true;
-
-
-    # Add fonts
+    # Add system fonts
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.mononoki
@@ -110,74 +208,8 @@
       vistafonts
     ];
 
+    # https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-    # Services
-    services.openssh = {
-      enable = true;
-      settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
-      };
-      openFirewall = true;
-    };
-
-    services.tailscale.enable = true;
-
-    services.kanata = {
-      enable = true;
-      keyboards = {
-        default = {
-          devices = [ ];  # catch all keybaord devices
-          config = builtins.readFile
-            ../../configs/kanata/default.kbd;
-        };
-      };
-    };
-
-    services.printing = {
-      enable = true;
-      drivers = [
-        pkgs.gutenprint
-        pkgs.brlaser
-        pkgs.hplip
-      ];
-    };
-
-    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/hardware/udisks2.nix
-    services.udisks2.enable = true;  # user space mounting
-
-
-    # Programs
-    environment.systemPackages = with pkgs; [
-      rofi-wayland
-      swaylock
-      wl-clipboard
-      grim   # screenshot utility
-      slurp  # screen area selection tool
-      hyprpaper
-      waybar
-
-      firefox
-      kitty
-      pulsemixer
-      pavucontrol
-      brightnessctl
-    ];
-
-    security.pam.services.swaylock = {};
-
-    programs = {
-      hyprland.enable = true;
-      zsh.enable = true;
-    };
-
-    modules = {
-      programs = {
-        bluetooth.enable = true;
-        core.enable = true;
-        ddc.enable = true;
-        virt-manager.enable = true;
-      };
-    };
   };
 }
