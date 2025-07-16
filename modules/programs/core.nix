@@ -17,6 +17,7 @@ in
       moreutils
       vim
       wget
+      curl
       gdu
       pv # pipe viewer
     ];
