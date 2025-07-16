@@ -7,6 +7,7 @@
 {
   imports =
     [
+      ./hardware-configuration.nix
       ../_server
       (modulesPath + "/installer/scan/not-detected.nix")
       (modulesPath + "/profiles/qemu-guest.nix")
