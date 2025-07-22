@@ -19,7 +19,7 @@
       enable = true;
       device = "/dev/sda";
       useOSProber = true;
-      configurationLimit = 10; # limit number of generations to save space
+      configurationLimit = 10; # limit number generations shown in boot menu
     };
     boot.resumeDevice = "/dev/disk/by-label/swap"; # sets the "resume" kernelParam (used to locate target partition for hibernation)
 
