@@ -54,7 +54,7 @@ nixos-rebuild switch --flake .#cloudlab --target-host root@5.78.74.50
 # 4b
 git clone git@github.com:austinliuigi/system.git ~/nixos
 sudo ln -s ~/nixos/ /etc/nixos
-sudo nixos-rebuild switch --flake .#cloudlab
+sudo nixos-rebuild switch --flake ~/nixos#cloudlab
 git clone git@github.com:austinliuigi/home.git ~/.config/home-manager
-nix run home-manager/master --switch --flake ~/.config/home-manager#austin
+nix run home-manager/master -- switch --flake ~/.config/home-manager#austin
 ```
