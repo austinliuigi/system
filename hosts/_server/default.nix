@@ -1,11 +1,14 @@
 # Documentation:
 #   - configuration.nix(5) man page
 #   - NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, inputs, ... }:
-
 {
-  imports = [ ../../modules ];
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [../../modules];
 
   config = {
     #===========================================================================================
@@ -27,9 +30,13 @@
       ];
       allowedUDPPorts = [
       ];
-      allowedTCPPortRanges = [ 
-      ];  
-      allowedUDPPortRanges = [ 
+      allowedTCPPortRanges = [
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 60000;
+          to = 61000;
+        } # mosh
       ];
     };
 
@@ -58,8 +65,9 @@
       enable = true;
       keyboards = {
         default = {
-          devices = [ ];  # catch all keybaord devices
-          config = builtins.readFile
+          devices = []; # catch all keybaord devices
+          config =
+            builtins.readFile
             ../../configs/kanata/default.kbd;
         };
       };
@@ -84,14 +92,12 @@
       };
     };
 
-
     #===========================================================================================
     # Miscellaneous Options
     #===========================================================================================
 
     # Set time zone
     time.timeZone = "America/Los_Angeles";
-
 
     # Select internationalization properties
     i18n.defaultLocale = "en_US.UTF-8";
@@ -107,13 +113,11 @@
       LC_TIME = "en_US.UTF-8";
     };
 
-
     # Configure keymap in X11
     services.xserver.xkb = {
       layout = "us";
       variant = "";
     };
-
 
     # Garbage collection
     nix.gc = {
@@ -122,7 +126,6 @@
       options = "--delete-older-than 14d";
     };
 
-
     # https://nixos.wiki/wiki/Storage_optimization
     nix.optimise.automatic = true;
 
@@ -130,7 +133,7 @@
     nixpkgs.config.allowUnfree = true;
 
     # Enable flakes and new commands
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
     # Add system fonts
     fonts.packages = with pkgs; [
@@ -141,7 +144,6 @@
     ];
 
     # https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
-    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
+    nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 }
