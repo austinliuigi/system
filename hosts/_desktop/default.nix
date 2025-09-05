@@ -27,6 +27,7 @@
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
+        2022 # eternal terminal
         3000 # nextjs dev server
         53317 # localsend
       ];

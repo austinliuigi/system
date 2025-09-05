@@ -27,6 +27,7 @@
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
+        2022 # eternal terminal
       ];
       allowedUDPPorts = [
       ];
