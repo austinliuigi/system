@@ -15,6 +15,7 @@ in {
       git
       gnumake
       htop
+      linux-manual
       man-pages
       man-pages-posix
       moreutils
